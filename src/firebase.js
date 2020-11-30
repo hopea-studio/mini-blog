@@ -15,7 +15,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 //firebase.analytics()
 
+export const firestore = firebase.firestore()
+
+firestore.settings({ timestampsInSnapshots: true })
+
 window.firebase = firebase
 
-export const firestore = firebase.firestore()
 export default firebase

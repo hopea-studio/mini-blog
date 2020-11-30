@@ -11,14 +11,10 @@ const App = () => {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    firestore
-      .collection("posts")
-      .get()
-      .then((data) => {
-        const updatedPost = data.docs.map((doc) => docsWithId(doc))
-        setPosts(updatedPost)
-        console.log(updatedPost)
-      })
+    firestore.collection("posts").onSnapshot((snapShot) => {
+      const post = snapShot.docs.map(docsWithId)
+      setPosts(post)
+    })
   }, [])
 
   return (

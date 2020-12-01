@@ -22,6 +22,10 @@ const AddPost = () => {
     const post = {
       title,
       content,
+      stars: 0,
+      favorites: 0,
+      comments: 0,
+      createdAt: new Date(),
     }
     firestore.collection("posts").doc(post.id).set(post)
 

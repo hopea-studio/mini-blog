@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Header from "./components/Header"
 import { theme } from "./theme"
 import { ThemeProvider } from "@material-ui/core"
-import { Switch } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 import Posts from "./components/Posts"
 import { auth, firestore } from "./firebase"
 import { docsWithId } from "./utilities"
@@ -27,8 +27,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Posts />
-      <Switch></Switch>
+      <Switch>
+        <Route exact path="/" component={Posts} />
+      </Switch>
     </ThemeProvider>
   )
 }

@@ -1,14 +1,13 @@
 import { Box, Button, Card, CardContent, Typography } from "@material-ui/core"
 import moment from "moment"
-import React, { useContext } from "react"
+import React from "react"
 import { firestore } from "../firebase"
-import { userContext } from "../providers/UsersProvider"
 
-const Post = ({ id, title, content, comments, stars, createdAt }) => {
+const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
   const postRef = firestore.doc(`posts/${id}`)
   const remove = () => postRef.delete()
   const star = () => postRef.update({ stars: stars + 1 })
-  const user = useContext(userContext)
+
   return (
     <Box>
       <Card>

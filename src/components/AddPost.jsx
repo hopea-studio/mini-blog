@@ -1,6 +1,7 @@
 import { Box, Button, TextField } from "@material-ui/core"
-import React, { useState } from "react"
-import { firestore, auth } from "../firebase"
+import React, { useContext, useState } from "react"
+import { firestore } from "../firebase"
+import { userContext } from "../providers/UsersProvider"
 
 const initialState = {
   title: "",
@@ -9,33 +10,29 @@ const initialState = {
 
 const AddPost = () => {
   const [state, setState] = useState(initialState)
+  const user = useContext(userContext)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setState({ ...state, [name]: value })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     const { title, content } = state
-    const { uid, displayName, email, photoURL } = auth.currentUser || {}
 
     const post = {
       title,
       content,
+      user,
       stars: 0,
       favorites: 0,
       comments: 0,
       createdAt: new Date(),
-      user: {
-        uid,
-        displayName,
-        email,
-        photoURL,
-      },
     }
-    firestore.collection("posts").doc(post.id).set(post)
+
+    firestore.collection("posts").add(post)
 
     setState(initialState)
   }

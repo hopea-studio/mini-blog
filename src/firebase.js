@@ -39,13 +39,13 @@ export const createUserProfileDocument = async (user, additionalData) => {
 
   if (!snapshot.exists) {
     const { displayName, email, photoURL } = user
-    const createAt = new Date()
+    const createdAt = new Date()
     try {
       await userRef.set({
         displayName,
         email,
         photoURL,
-        createAt,
+        createdAt,
         ...additionalData,
       })
     } catch (error) {
@@ -59,7 +59,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
 export const getUserDocument = async (uid) => {
   if (!uid) return null
   try {
-    return firestore.collection("users").doc(uid)
+    return await firestore.collection("users").doc(uid)
   } catch (error) {
     console.error("error fetching user", error.message)
   }

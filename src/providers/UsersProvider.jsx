@@ -7,7 +7,7 @@ const UsersProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+    const unsubsribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         createUserProfileDocument(userAuth).then((userRef) => {
           userRef.onSnapshot((snapshot) => {
@@ -17,6 +17,8 @@ const UsersProvider = ({ children }) => {
       }
       setUser(userAuth)
     })
+
+    return () => unsubsribe()
   }, [])
 
   return <userContext.Provider value={user}>{children}</userContext.Provider>

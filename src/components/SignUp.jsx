@@ -15,20 +15,25 @@ const SignUp = () => {
     const { name, value } = e.target
     setState({ ...state, [name]: value })
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
 
-    const { displayName, email, password } = state
+  const handleSubmit = async (event) => {
+    event.preventDefault()
 
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        createUserProfileDocument(user, { displayName })
-      })
-      .catch((error) => console.error(error))
+    const { email, password, displayName } = state
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      )
+      createUserProfileDocument(user, { displayName })
+    } catch (error) {
+      console.error(error)
+    }
 
     setState(initialState)
   }
+
   return (
     <Box>
       <form onSubmit={handleSubmit}>

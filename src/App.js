@@ -4,11 +4,18 @@ import { theme } from "./theme"
 import { ThemeProvider } from "@material-ui/core"
 import { Switch } from "react-router-dom"
 import Posts from "./components/Posts"
-import { firestore } from "./firebase"
+import { auth, firestore } from "./firebase"
 import { docsWithId } from "./utilities"
 
 const App = () => {
   const [posts, setPosts] = useState([])
+  const [user, setUser] = useState(null)
+
+  let unsubscribeFromAuth = null
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => setUser(user))
+  }, [])
 
   useEffect(() => {
     firestore.collection("posts").onSnapshot((snapShot) => {
@@ -20,7 +27,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Posts posts={posts} />
+      <Posts />
       <Switch></Switch>
     </ThemeProvider>
   )

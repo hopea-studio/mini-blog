@@ -1,6 +1,6 @@
 import { Box, Button, TextField } from "@material-ui/core"
 import React, { useState } from "react"
-import { firestore } from "../firebase"
+import { firestore, auth } from "../firebase"
 
 const initialState = {
   title: "",
@@ -19,6 +19,8 @@ const AddPost = () => {
     e.preventDefault()
 
     const { title, content } = state
+    const { uid, displayName, email, photoURL } = auth.currentUser || {}
+
     const post = {
       title,
       content,
@@ -26,6 +28,12 @@ const AddPost = () => {
       favorites: 0,
       comments: 0,
       createdAt: new Date(),
+      user: {
+        uid,
+        displayName,
+        email,
+        photoURL,
+      },
     }
     firestore.collection("posts").doc(post.id).set(post)
 

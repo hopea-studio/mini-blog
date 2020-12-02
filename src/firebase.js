@@ -30,4 +30,39 @@ firestore.settings({ timestampsInSnapshots: true })
 
 window.firebase = firebase
 
+export const createUserProfileDocument = async (user, additionalData) => {
+  if (!user) return
+
+  const userRef = firestore.doc(`users/${user.uid}`)
+
+  const snapshot = await userRef.get()
+
+  if (!snapshot.exists) {
+    const { displayName, email, photoURL } = user
+    const createAt = new Date()
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        photoURL,
+        createAt,
+        ...additionalData,
+      })
+    } catch (error) {
+      console.error("error creating user", error.message)
+    }
+  }
+
+  return getUserDocument(user.uid)
+}
+
+export const getUserDocument = async (uid) => {
+  if (!uid) return null
+  try {
+    return firestore.collection("users").doc(uid)
+  } catch (error) {
+    console.error("error fetching user", error.message)
+  }
+}
+
 export default firebase

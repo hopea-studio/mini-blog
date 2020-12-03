@@ -11,13 +11,13 @@ const UserCard = ({ displayName, photoURL, email, createdAt, children }) => {
       <div className="CurrentUser--profile">
         {photoURL && <img src={photoURL} alt={displayName} />}
         <div className="CurrentUser--information">
-          <Link to="profile">
+          <Link to="/profile">
             <h2>{displayName}</h2>
           </Link>
           <p className="email">{email}</p>
-          {/* <p className="created-at">
-            {moment(createdAt.toDate && createdAt.toDate()).calendar()}
-          </p> */}
+          <p className="created-at">
+            {moment(createdAt && createdAt.toDate()).calendar()}
+          </p>
         </div>
       </div>
       <div>

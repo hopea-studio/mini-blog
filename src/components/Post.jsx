@@ -1,12 +1,24 @@
 import { Box, Button, Card, CardContent, Typography } from "@material-ui/core"
 import moment from "moment"
-import React from "react"
+import React, { useContext } from "react"
 import { firestore } from "../firebase"
+import { userContext } from "../providers/UsersProvider"
 
 const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
   const postRef = firestore.doc(`posts/${id}`)
   const remove = () => postRef.delete()
   const star = () => postRef.update({ stars: stars + 1 })
+
+  const currentUser = useContext(userContext)
+  const checkCurrentUser = (currentUser, user) => {
+    if (currentUser) {
+      if (currentUser.uid === user.uid) {
+        return true
+      }
+    } else {
+      return false
+    }
+  }
 
   return (
     <Box>
@@ -19,7 +31,9 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
           <Typography>⭐️{stars}</Typography>
           <Typography>{user.displayName}</Typography>
           <Button onClick={star}>Star</Button>
-          <Button onClick={remove}>delete</Button>
+          {checkCurrentUser(currentUser, user) && (
+            <Button onClick={remove}>delete</Button>
+          )}
         </CardContent>
       </Card>
     </Box>

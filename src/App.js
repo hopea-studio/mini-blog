@@ -4,6 +4,7 @@ import { theme } from "./theme"
 import { ThemeProvider } from "@material-ui/core"
 import { Switch, Route } from "react-router-dom"
 import Posts from "./components/Posts"
+import UserProfile from "./components/UserProfile"
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={Posts} />
+        <Route exact path="/profile" component={UserProfile} />
       </Switch>
     </ThemeProvider>
   )

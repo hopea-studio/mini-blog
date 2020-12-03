@@ -1,14 +1,13 @@
 import { Box, Button, TextField } from "@material-ui/core"
 import React, { useState } from "react"
-import { auth, firestore } from "../firebase"
+import { auth, firestore, storage } from "../firebase"
 
 const UserProfile = () => {
   const [displayName, setDisplayName] = useState("")
-  //let imageInput = null
+  const fileRef = React.useRef(null)
 
   const uid = auth.currentUser.uid
   const userRef = firestore.collection("users").doc(uid)
-  //const file = imageInput && imageInput.files[0]
 
   const handleChange = (e) => {
     const { value } = e.target
@@ -18,8 +17,21 @@ const UserProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    const file = fileRef && fileRef.current.files[0]
+
     if (displayName) {
       userRef.update({ displayName: displayName })
+    }
+
+    if (file) {
+      storage
+        .ref()
+        .child("user-profiles")
+        .child(uid)
+        .child(file.name)
+        .put(file)
+        .then((res) => res.ref.getDownloadURL())
+        .then((photoURL) => userRef.update({ photoURL }))
     }
   }
 
@@ -31,6 +43,7 @@ const UserProfile = () => {
         placeholder="Display Name"
         onChange={handleChange}
       />
+      <input type="file" ref={fileRef} />
       <Button onClick={handleSubmit}>Submit</Button>
     </Box>
   )

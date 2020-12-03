@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardContent, Typography } from "@material-ui/core"
 import moment from "moment"
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 import { firestore } from "../firebase"
 import { userContext } from "../providers/UsersProvider"
 
@@ -24,7 +25,9 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
     <Box>
       <Card>
         <CardContent>
-          <Typography variant="h5">{title}</Typography>
+          <Link to={`/posts/${id}`}>
+            <Typography variant="h5">{title}</Typography>
+          </Link>
           <Typography>{content}</Typography>
           <Typography>{comments}</Typography>
           <Typography>{moment(createdAt.toDate()).calendar()}</Typography>

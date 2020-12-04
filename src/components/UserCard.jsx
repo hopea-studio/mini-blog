@@ -24,18 +24,17 @@ const UserCard = ({ displayName, photoURL, email, createdAt, children }) => {
           <Typography>{displayName}</Typography>{" "}
         </CardActionArea>
         <CardContent>
-          <Collapse>
-            <Typography>
-              {moment(createdAt && createdAt.toDate()).calendar()}
-            </Typography>
-            <Typography>{email}</Typography>
-            <Button onClick={signOut}>Sign Out</Button>
-            <Button>
-              <Link component={RouterLink} underline="none" to="/profile">
-                Edit profile
-              </Link>
-            </Button>
-          </Collapse>
+          <Collapse></Collapse>
+          <Typography>
+            {moment(createdAt && createdAt.toDate()).calendar()}
+          </Typography>
+          <Typography>{email}</Typography>
+          <Button onClick={signOut}>Sign Out</Button>
+          <Button>
+            <Link component={RouterLink} underline="none" to="/profile">
+              Edit profile
+            </Link>
+          </Button>
         </CardContent>
       </Card>
       <div>

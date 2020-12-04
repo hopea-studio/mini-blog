@@ -2,7 +2,7 @@ import { createMuiTheme } from "@material-ui/core"
 
 export const theme = createMuiTheme({
   typography: {
-    h1: {
+    h6: {
       fontFamily: "'Libre Baskerville', serif",
     },
     body1: {

@@ -29,10 +29,10 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
             <Typography variant="h5">{title}</Typography>
           </Link>
           <Typography>{content}</Typography>
-          <Typography>{comments}</Typography>
-          <Typography>{moment(createdAt.toDate()).calendar()}</Typography>
+          <Typography>Comments: {comments}</Typography>
+          <Typography>Created At{moment(createdAt.toDate()).calendar()}</Typography>
           <Typography>⭐️{stars}</Typography>
-          <Typography>{user.displayName}</Typography>
+          <Typography>Created By{user.displayName}</Typography>
           <Button onClick={star}>Star</Button>
           {checkCurrentUser(currentUser, user) && (
             <Button onClick={remove}>delete</Button>

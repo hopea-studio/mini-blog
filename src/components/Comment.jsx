@@ -5,10 +5,10 @@ import React from "react"
 const Comment = ({ content, user, createdAt }) => {
   return (
     <Box>
-      <Typography>{user.displayName}</Typography>
+      <Typography>Comment By:{user.displayName}</Typography>
       <Typography>{content}</Typography>
       <Typography>
-        {createdAt && moment(createdAt.toDate()).calendar()}
+        Created at:{createdAt && moment(createdAt.toDate()).calendar()}
       </Typography>
     </Box>
   )

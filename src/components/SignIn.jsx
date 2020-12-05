@@ -1,10 +1,18 @@
 import { Box, Button, TextField } from "@material-ui/core"
 import React, { useState } from "react"
 import { auth, signInWithGoogle } from "../firebase"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: theme.palette.warning.main,
+  },
+}))
 
 const initialState = { email: "", password: "" }
 
 const SignIn = () => {
+  const classes = useStyles()
   const [state, setState] = useState(initialState)
 
   const handleChange = (event) => {
@@ -36,7 +44,13 @@ const SignIn = () => {
         value={state.password}
         onChange={handleChange}
       />
-      <Button onClick={handleSubmit}>Sign In</Button>
+      <Button
+        onClick={handleSubmit}
+        variant="contained"
+        className={classes.button}
+      >
+        Sign In
+      </Button>
       <Button onClick={signInWithGoogle}>Sign In With Google</Button>
     </Box>
   )

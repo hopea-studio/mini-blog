@@ -17,3 +17,26 @@ exports.incrementCommentCount = functions.firestore
 
     return postRef.update({ comments: comments + 1 })
   })
+
+exports.getAllPosts = functions.https.onRequest(async (request, response) => {
+  const snapshot = await firestore.collection("posts").get()
+  const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+  response.json({ posts })
+})
+
+exports.sanitizeContent = functions.firestore
+  .document("posts/{postId}")
+  .onWrite(async (change) => {
+    if (!change.after.exists) return
+
+    const { content, sanitized } = change.after.data()
+
+    if (content && !sanitized) {
+      return change.after.ref.update({
+        content: content.replace(/something/g, "**********"),
+        sanitized: true,
+      })
+    }
+
+    return null
+  })

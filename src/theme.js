@@ -1,5 +1,16 @@
 import { createMuiTheme } from "@material-ui/core"
 
+const colorHue = {
+  background: "#004643",
+  headline: "#fffffe",
+  paragraph: "#abd1c6",
+  Button: "#f9bc60",
+  ButtonText: "#001e1d",
+  main: "#e8e4e6",
+  stroke: "#001e1d",
+  Tertiary: "#e16162",
+}
+
 export const theme = createMuiTheme({
   typography: {
     h6: {
@@ -11,22 +22,20 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      light: "#336b68",
-      main: "#004643",
-      dark: "#00312e",
-      contrastText: "#e8e4e6",
+      main: colorHue.background,
+
+      contrastText: colorHue.main,
     },
     secondary: {
-      light: "#bbdad1",
-      main: "#abd1c6",
-      dark: "#77928a",
-      contrastText: "#001e1d",
+      main: colorHue.paragraph,
+
+      contrastText: colorHue.ButtonText,
     },
     background: {
-      default: "#004643",
+      default: colorHue.paragraph,
     },
     warning: {
-      main: "#f9bc60",
+      main: colorHue.Tertiary,
     },
   },
 })

@@ -1,28 +1,44 @@
-import { Box, Button } from "@material-ui/core"
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  Collapse,
+  Link,
+  Typography,
+} from "@material-ui/core"
 import React from "react"
 import moment from "moment"
 import { signOut } from "../firebase"
 
-import { Link } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom"
 
 const UserCard = ({ displayName, photoURL, email, createdAt, children }) => {
   return (
     <Box>
-      <div className="CurrentUser--profile">
-        {photoURL && <img src={photoURL} alt={displayName} />}
-        <div className="CurrentUser--information">
-          <Link to="/profile">
-            <h2>{displayName}</h2>
-          </Link>
-          <p className="email">{email}</p>
-          <p className="created-at">
+      <Card>
+        <CardActionArea>
+          {photoURL && <Avatar src={photoURL} alt={displayName} />}
+          <Typography>{displayName}</Typography>{" "}
+        </CardActionArea>
+        <CardContent>
+          <Collapse></Collapse>
+          <Typography>
             {moment(createdAt && createdAt.toDate()).calendar()}
-          </p>
-        </div>
-      </div>
+          </Typography>
+          <Typography>{email}</Typography>
+          <Button onClick={signOut}>Sign Out</Button>
+          <Button>
+            <Link component={RouterLink} underline="none" to="/profile">
+              Edit profile
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
       <div>
         <div>{children}</div>
-        <Button onClick={signOut}>Sign Out</Button>
       </div>
     </Box>
   )

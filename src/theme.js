@@ -13,28 +13,39 @@ const colorHue = {
 
 export const theme = createMuiTheme({
   typography: {
-    h6: {
+    h4: {
       fontFamily: "'Libre Baskerville', serif",
     },
     body1: {
       fontFamily: "'Playfair Display', serif",
     },
+    subtitle1: {
+      fontFamily: "'Libre Baskerville', serif",
+    },
   },
   palette: {
+    text: {
+      primary: colorHue.stroke,
+    },
+    common: {
+      black: colorHue.stroke,
+      white: colorHue.headline,
+    },
     primary: {
       main: colorHue.background,
-
       contrastText: colorHue.main,
     },
     secondary: {
       main: colorHue.paragraph,
-
       contrastText: colorHue.ButtonText,
     },
     background: {
       default: colorHue.paragraph,
     },
     warning: {
+      main: colorHue.Button,
+    },
+    error: {
       main: colorHue.Tertiary,
     },
   },

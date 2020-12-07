@@ -1,7 +1,8 @@
-import { Box, Button, TextField } from "@material-ui/core"
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core"
 import React, { useState } from "react"
 import { auth, signInWithGoogle } from "../firebase"
 import { makeStyles } from "@material-ui/core/styles"
+import google from "../images/btn_google_dark_normal_ios.svg"
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -31,27 +32,47 @@ const SignIn = () => {
   }
   return (
     <Box>
-      <TextField
-        name="email"
-        placeholder="Email"
-        value={state.email}
-        onChange={handleChange}
-      />
-      <TextField
-        type="password"
-        name="password"
-        placeholder="password"
-        value={state.password}
-        onChange={handleChange}
-      />
-      <Button
-        onClick={handleSubmit}
-        variant="contained"
-        className={classes.button}
-      >
-        Sign In
-      </Button>
-      <Button onClick={signInWithGoogle}>Sign In With Google</Button>
+      <Grid container spacing={2}>
+        <Grid item container xs={6} alignItems="center">
+          <Button
+            onClick={signInWithGoogle}
+            variant="contained"
+            className={classes.button}
+          >
+            Sign in with <img src={google} />
+          </Button>
+        </Grid>
+        <Grid item container xs={6} justify="center" spacing={1}>
+          <Grid item>
+            <TextField
+              variant="outlined"
+              name="email"
+              placeholder="Email"
+              value={state.email}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              variant="outlined"
+              type="password"
+              name="password"
+              placeholder="password"
+              value={state.password}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              className={classes.button}
+            >
+              Sign In
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

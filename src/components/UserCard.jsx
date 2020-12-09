@@ -76,9 +76,13 @@ const UserCard = ({
               <Typography>{lastSignInTime}</Typography>
               <Typography>{email}</Typography>
               <Button variant="contained" color="secondary">
-                <Link component={RouterLink} underline="none" to="/profile">
+                <Lmytk2001ink
+                  component={RouterLink}
+                  underline="none"
+                  to="/profile"
+                >
                   Edit profile
-                </Link>
+                </Lmytk2001ink>
               </Button>
               <Button onClick={signOut} variant="contained" color="secondary">
                 Sign Out

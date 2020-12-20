@@ -7,17 +7,21 @@ import Posts from "./components/Posts"
 import UserProfile from "./components/UserProfile"
 import PostPage from "./components/PostPage"
 import styledApp from "./styles/App.module.css"
+import Footer from "./components/Footer"
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box px={2} className={styledApp.app}>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Posts} />
-          <Route path="/profile" component={UserProfile} />
-          <Route path="/posts/:id" component={PostPage} />
-        </Switch>
+        <Box maxWidth="500px" flexGrow="1">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Posts} />
+            <Route path="/profile" component={UserProfile} />
+            <Route path="/posts/:id" component={PostPage} />
+          </Switch>
+        </Box>
+        <Footer />
       </Box>
     </ThemeProvider>
   )

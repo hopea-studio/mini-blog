@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core"
+import { Button, Grid, TextField } from "@material-ui/core"
 import React, { useState } from "react"
 import { auth, signInWithGoogle } from "../firebase"
 import { makeStyles } from "@material-ui/core/styles"
@@ -31,49 +31,47 @@ const SignIn = () => {
     setState(initialState)
   }
   return (
-    <Box>
-      <Grid container spacing={2}>
-        <Grid item container xs={6} alignItems="center">
+    <Grid item container spacing={2} md={6}>
+      <Grid item container xs={6} justify="center">
+        <Grid item>
+          <TextField
+            variant="outlined"
+            name="email"
+            placeholder="Email"
+            value={state.email}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            variant="outlined"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={state.password}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item>
           <Button
-            onClick={signInWithGoogle}
+            onClick={handleSubmit}
             variant="contained"
             className={classes.button}
           >
-            Sign in with <img src={google} />
+            Sign In
           </Button>
         </Grid>
-        <Grid item container xs={6} justify="center" spacing={1}>
-          <Grid item>
-            <TextField
-              variant="outlined"
-              name="email"
-              placeholder="Email"
-              value={state.email}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              variant="outlined"
-              type="password"
-              name="password"
-              placeholder="password"
-              value={state.password}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              className={classes.button}
-            >
-              Sign In
-            </Button>
-          </Grid>
-        </Grid>
       </Grid>
-    </Box>
+      <Grid item container xs={6} alignItems="center">
+        <Button
+          onClick={signInWithGoogle}
+          variant="contained"
+          className={classes.button}
+        >
+          Sign in with <img src={google} alt="google" />
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 

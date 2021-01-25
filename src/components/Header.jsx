@@ -14,9 +14,9 @@ const Header = () => {
   const classes = useStyles()
 
   return (
-    <Box py={2}>
-      <Grid container spacing={2}>
-        <Grid item>
+    <Box py={2} my={2}>
+      <Grid container spacing={2} justify="space-between" alignItems="center">
+        <Grid item md={4}>
           <Link component={RouterLink} underline="none" to="/">
             <Typography underline="none" variant="h4" className={classes.text}>
               The Secret Cellar
@@ -29,9 +29,8 @@ const Header = () => {
             囌悅禾Θ彵菂棚友ィ门菂祕樒洞穴 ⓛⓞⓥⓔ 
           </Typography>
         </Grid>
-        <Grid item>
-          <Authentication />
-        </Grid>
+
+        <Authentication />
       </Grid>
     </Box>
   )

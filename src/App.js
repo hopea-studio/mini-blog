@@ -12,8 +12,8 @@ import Footer from "./components/Footer"
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Box px={2} className={styledApp.app}>
-        <Box maxWidth="500px" flexGrow="1">
+      <Box className={styledApp.app}>
+        <Box px={4} flexGrow="1">
           <Header />
           <Switch>
             <Route exact path="/" component={Posts} />

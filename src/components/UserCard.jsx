@@ -3,9 +3,6 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
   Collapse,
   Grid,
   Link,
@@ -19,9 +16,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { Link as RouterLink } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
 import clsx from "clsx"
+import { green } from "@material-ui/core/colors"
 
 const useStyles = makeStyles((theme) => ({
   expand: {
+    backgroundColor: green[100],
     transform: "rotate(0deg)",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
@@ -29,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: "rotate(180deg)",
+  },
+  card: {
+    width: 250,
+    padding: 5,
+    backgroundColor: green[100],
+  },
+  iconSection: {
+    backgroundColor: green[100],
   },
 }))
 
@@ -47,34 +54,42 @@ const UserCard = ({
   }
 
   return (
-    <Box>
-      <Card>
-        <Grid container direction="column">
-          <Grid item container direction="column" alignItems="center">
-            {photoURL && (
-              <Avatar src={photoURL} alt={displayName} sizes="large" />
-            )}
-            <Typography>{displayName}</Typography>
-          </Grid>
-          <Grid item container justify="center">
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <Typography>
-                {moment(createdAt && createdAt.toDate()).calendar()}
-              </Typography>
-              <Typography>{lastSignInTime}</Typography>
-              <Typography>{email}</Typography>
+    <Card className={classes.card}>
+      <Grid container direction="column">
+        <Grid
+          item
+          container
+          direction="column"
+          alignItems="center"
+          justify="space-evenly"
+          className={classes.container}
+        >
+          {photoURL && <Avatar src={photoURL} alt={displayName} />}
+          <Typography variant="h6">{displayName}</Typography>
+        </Grid>
+        <Grid item container justify="center" className={classes.iconSection}>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </Grid>
+        <Grid item className={classes.iconSection}>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Typography align="center">{email}</Typography>
+            <Typography align="center">
+              Last login: {lastSignInTime ? lastSignInTime.slice(0, 12) : null}
+            </Typography>
+            <Typography align="center">
+              Registered since:{" "}
+              {moment(createdAt && createdAt.toDate()).calendar()}
+            </Typography>
+            <Box display="flex" justifyContent="space-evenly" py={1}>
               <Button variant="contained" color="secondary">
                 <Link component={RouterLink} underline="none" to="/profile">
                   Edit profile
@@ -83,11 +98,11 @@ const UserCard = ({
               <Button onClick={signOut} variant="contained" color="secondary">
                 Sign Out
               </Button>
-            </Collapse>
-          </Grid>
+            </Box>
+          </Collapse>
         </Grid>
-      </Card>
-    </Box>
+      </Grid>
+    </Card>
   )
 }
 

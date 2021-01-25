@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@material-ui/core"
+import { Button, Grid, TextField } from "@material-ui/core"
 import React, { useState } from "react"
 
 const AddComment = ({ onCreate }) => {
@@ -15,7 +15,7 @@ const AddComment = ({ onCreate }) => {
   }
 
   return (
-    <Box>
+    <Grid item>
       <TextField
         name="content"
         placeholder="Comment"
@@ -23,7 +23,7 @@ const AddComment = ({ onCreate }) => {
         onChange={handleChange}
       />
       <Button onClick={handleSubmit}>Add Comment</Button>
-    </Box>
+    </Grid>
   )
 }
 

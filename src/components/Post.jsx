@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { firestore } from "../firebase"
 import { userContext } from "../providers/UsersProvider"
 import { makeStyles } from "@material-ui/core/styles"
+import { BorderRightTwoTone } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -27,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     height: "100%",
+  },
+  title: {
+    textDecoration: "none",
+    border: "3px dotted grey",
+    borderRadius: "4px",
+    padding: "2px 4px",
+    color: "black",
   },
 }))
 
@@ -61,12 +69,13 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
           >
             <Grid item container justify="space-between">
               <Typography
-                variant="h4"
+                variant="h5"
                 paragraph
                 component={Link}
                 to={`/posts/${id}`}
+                className={classes.title}
               >
-                {title}
+                {title.toUpperCase()}
               </Typography>
               <Avatar src={user.photoURL} />
             </Grid>

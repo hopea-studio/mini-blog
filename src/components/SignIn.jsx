@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core"
+import { Button, Grid, TextField } from "@material-ui/core"
 import React, { useState } from "react"
 import { auth, signInWithGoogle } from "../firebase"
 import { makeStyles } from "@material-ui/core/styles"

@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import React, { useEffect, useState } from "react"
 import { withRouter } from "react-router-dom"
 import { firestore } from "../firebase"
@@ -41,10 +41,10 @@ const PostPage = ({ match, user }) => {
   }
 
   return (
-    <Box>
+    <Grid container spacing={3} alignItems="center" direction="column">
       {post && <Post {...post} />}
       <Comments comments={comments} onCreate={addComment} />
-    </Box>
+    </Grid>
   )
 }
 

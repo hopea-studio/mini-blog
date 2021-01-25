@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   card: {
-    height: 100,
     width: 250,
+    padding: 5,
     backgroundColor: green[100],
   },
   iconSection: {
@@ -54,58 +54,55 @@ const UserCard = ({
   }
 
   return (
-    <Box>
-      <Card>
-        <Grid container direction="column">
-          <Grid
-            item
-            container
-            direction="column"
-            alignItems="center"
-            justify="space-evenly"
-            className={classes.card}
-          >
-            {photoURL && <Avatar src={photoURL} alt={displayName} />}
-            <Typography variant="h6">{displayName}</Typography>
-          </Grid>
-          <Grid item container justify="center" className={classes.iconSection}>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Grid>
-          <Grid item className={classes.iconSection}>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <Typography align="center">{email}</Typography>
-              <Typography align="center">
-                Last login:{" "}
-                {lastSignInTime ? lastSignInTime.slice(0, 12) : null}
-              </Typography>
-              <Typography align="center">
-                Registered since:{" "}
-                {moment(createdAt && createdAt.toDate()).calendar()}
-              </Typography>
-              <Box display="flex" justifyContent="space-evenly" py={1}>
-                <Button variant="contained" color="secondary">
-                  <Link component={RouterLink} underline="none" to="/profile">
-                    Edit profile
-                  </Link>
-                </Button>
-                <Button onClick={signOut} variant="contained" color="secondary">
-                  Sign Out
-                </Button>
-              </Box>
-            </Collapse>
-          </Grid>
+    <Card className={classes.card}>
+      <Grid container direction="column">
+        <Grid
+          item
+          container
+          direction="column"
+          alignItems="center"
+          justify="space-evenly"
+          className={classes.container}
+        >
+          {photoURL && <Avatar src={photoURL} alt={displayName} />}
+          <Typography variant="h6">{displayName}</Typography>
         </Grid>
-      </Card>
-    </Box>
+        <Grid item container justify="center" className={classes.iconSection}>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </Grid>
+        <Grid item className={classes.iconSection}>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Typography align="center">{email}</Typography>
+            <Typography align="center">
+              Last login: {lastSignInTime ? lastSignInTime.slice(0, 12) : null}
+            </Typography>
+            <Typography align="center">
+              Registered since:{" "}
+              {moment(createdAt && createdAt.toDate()).calendar()}
+            </Typography>
+            <Box display="flex" justifyContent="space-evenly" py={1}>
+              <Button variant="contained" color="secondary">
+                <Link component={RouterLink} underline="none" to="/profile">
+                  Edit profile
+                </Link>
+              </Button>
+              <Button onClick={signOut} variant="contained" color="secondary">
+                Sign Out
+              </Button>
+            </Box>
+          </Collapse>
+        </Grid>
+      </Grid>
+    </Card>
   )
 }
 

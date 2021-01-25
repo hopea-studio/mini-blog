@@ -1,4 +1,4 @@
-import { Box, Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import React, { useContext } from "react"
 import { postsContext } from "../providers/PostsProvider"
 import { userContext } from "../providers/UsersProvider"
@@ -9,14 +9,14 @@ const Posts = () => {
   const posts = useContext(postsContext)
   const user = useContext(userContext)
   return (
-    <Box>
+    <Grid container justify="center">
       {user && <AddPost />}
-      <Grid container spacing={2}>
+      <Grid item container spacing={2}>
         {posts.map((post) => (
           <Post key={post.id} {...post} />
         ))}
       </Grid>
-    </Box>
+    </Grid>
   )
 }
 

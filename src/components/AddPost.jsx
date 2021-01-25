@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@material-ui/core"
+import { Button, Grid, TextField } from "@material-ui/core"
 import React, { useContext, useState } from "react"
 import { firestore } from "../firebase"
 import { userContext } from "../providers/UsersProvider"
@@ -50,7 +50,14 @@ const AddPost = () => {
   }
 
   return (
-    <Grid container spacing={3} className={classes.container}>
+    <Grid
+      md={10}
+      xs={12}
+      item
+      container
+      spacing={3}
+      className={classes.container}
+    >
       <Grid item xs={5}>
         <TextField
           fullWidth

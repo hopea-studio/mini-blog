@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   Button,
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import { Link } from "react-router-dom"
 import { firestore } from "../firebase"
 import { userContext } from "../providers/UsersProvider"
 import { makeStyles } from "@material-ui/core/styles"
-import { BorderRightTwoTone } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
   card: {

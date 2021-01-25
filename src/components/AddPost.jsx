@@ -1,7 +1,18 @@
-import { Box, Button, TextField } from "@material-ui/core"
+import { Box, Button, Grid, TextField } from "@material-ui/core"
 import React, { useContext, useState } from "react"
 import { firestore } from "../firebase"
 import { userContext } from "../providers/UsersProvider"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    border: "3px solid black",
+    borderRadius: "5px",
+    padding: 10,
+    marginBottom: 20,
+    marginTop: 10,
+  },
+}))
 
 const initialState = {
   title: "",
@@ -9,6 +20,7 @@ const initialState = {
 }
 
 const AddPost = () => {
+  const classes = useStyles()
   const [state, setState] = useState(initialState)
   const user = useContext(userContext)
 
@@ -38,21 +50,38 @@ const AddPost = () => {
   }
 
   return (
-    <Box border="3px solid black" borderRadius="5px" py={5} my={2}>
-      <TextField
-        name="title"
-        value={state.title}
-        id="title"
-        onChange={handleChange}
-      />
-      <TextField
-        name="content"
-        value={state.content}
-        id="content"
-        onChange={handleChange}
-      />
-      <Button onClick={handleSubmit}>Submit</Button>
-    </Box>
+    <Grid container spacing={3} className={classes.container}>
+      <Grid item xs={5}>
+        <TextField
+          fullWidth
+          name="title"
+          placeholder="Title"
+          value={state.title}
+          id="title"
+          onChange={handleChange}
+        />{" "}
+      </Grid>
+      <Grid item xs={5}>
+        <TextField
+          fullWidth
+          name="content"
+          placeholder="Content"
+          value={state.content}
+          id="content"
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={2}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Add Notes!
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 

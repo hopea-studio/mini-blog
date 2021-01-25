@@ -50,7 +50,7 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
   }
 
   return (
-    <Grid item md={4}>
+    <Grid item md={4} xs={12} sm={6} lg={3} xl={2}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Grid

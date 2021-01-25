@@ -62,13 +62,11 @@ const UserCard = ({
             container
             direction="column"
             alignItems="center"
-            justify="center"
+            justify="space-evenly"
             className={classes.card}
           >
-            {photoURL && (
-              <Avatar src={photoURL} alt={displayName} sizes="large" />
-            )}
-            <Typography>{displayName}</Typography>
+            {photoURL && <Avatar src={photoURL} alt={displayName} />}
+            <Typography variant="h6">{displayName}</Typography>
           </Grid>
           <Grid item container justify="center" className={classes.iconSection}>
             <IconButton
@@ -86,20 +84,23 @@ const UserCard = ({
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <Typography align="center">{email}</Typography>
               <Typography align="center">
-                Last login: {lastSignInTime.slice(0, 12)}
+                Last login:{" "}
+                {lastSignInTime ? lastSignInTime.slice(0, 12) : null}
               </Typography>
               <Typography align="center">
                 Registered since:{" "}
                 {moment(createdAt && createdAt.toDate()).calendar()}
               </Typography>
-              <Button variant="contained" color="secondary">
-                <Link component={RouterLink} underline="none" to="/profile">
-                  Edit profile
-                </Link>
-              </Button>
-              <Button onClick={signOut} variant="contained" color="secondary">
-                Sign Out
-              </Button>
+              <Box display="flex" justifyContent="space-evenly" py={1}>
+                <Button variant="contained" color="secondary">
+                  <Link component={RouterLink} underline="none" to="/profile">
+                    Edit profile
+                  </Link>
+                </Button>
+                <Button onClick={signOut} variant="contained" color="secondary">
+                  Sign Out
+                </Button>
+              </Box>
             </Collapse>
           </Grid>
         </Grid>

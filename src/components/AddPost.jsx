@@ -38,7 +38,7 @@ const AddPost = () => {
   }
 
   return (
-    <Box>
+    <Box border="3px solid black" borderRadius="5px" py={5} my={2}>
       <TextField
         name="title"
         value={state.title}

@@ -86,15 +86,23 @@ const Post = ({ id, title, content, comments, stars, createdAt, user }) => {
 
               <Typography>Created By {user.displayName}</Typography>
             </Grid>
-            <Grid item container justify="center">
-              <Button onClick={star} variant="outlined">
-                Star
-              </Button>
+            <Grid
+              item
+              container
+              justify={
+                checkCurrentUser(currentUser, user)
+                  ? "space-between"
+                  : "flex-end"
+              }
+            >
               {checkCurrentUser(currentUser, user) && (
                 <Button onClick={remove} variant="outlined">
                   delete
                 </Button>
               )}
+              <Button onClick={star} variant="outlined">
+                Star
+              </Button>
             </Grid>
           </Grid>
         </CardContent>

@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <Box py={2}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justify="space-between" alignItems="center">
         <Grid item>
           <Link component={RouterLink} underline="none" to="/">
             <Typography underline="none" variant="h4" className={classes.text}>

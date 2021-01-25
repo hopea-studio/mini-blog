@@ -13,7 +13,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box px={2} className={styledApp.app}>
-        <Box maxWidth="500px" flexGrow="1">
+        <Box px={2} flexGrow="1">
           <Header />
           <Switch>
             <Route exact path="/" component={Posts} />

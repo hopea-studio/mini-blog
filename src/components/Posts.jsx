@@ -11,7 +11,7 @@ const Posts = () => {
   return (
     <Box>
       {user && <AddPost />}
-      <Grid container direction="column" spacing={1}>
+      <Grid container spacing={2}>
         {posts.map((post) => (
           <Post key={post.id} {...post} />
         ))}

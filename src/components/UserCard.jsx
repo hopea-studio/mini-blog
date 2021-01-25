@@ -3,9 +3,6 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
   Collapse,
   Grid,
   Link,
@@ -19,9 +16,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { Link as RouterLink } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
 import clsx from "clsx"
+import { green } from "@material-ui/core/colors"
 
 const useStyles = makeStyles((theme) => ({
   expand: {
+    backgroundColor: green[100],
     transform: "rotate(0deg)",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
@@ -29,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: "rotate(180deg)",
+  },
+  card: {
+    height: 100,
+    width: 250,
+    backgroundColor: green[100],
+  },
+  iconSection: {
+    backgroundColor: green[100],
   },
 }))
 
@@ -50,13 +57,20 @@ const UserCard = ({
     <Box>
       <Card>
         <Grid container direction="column">
-          <Grid item container direction="column" alignItems="center">
+          <Grid
+            item
+            container
+            direction="column"
+            alignItems="center"
+            justify="center"
+            className={classes.card}
+          >
             {photoURL && (
               <Avatar src={photoURL} alt={displayName} sizes="large" />
             )}
             <Typography>{displayName}</Typography>
           </Grid>
-          <Grid item container justify="center">
+          <Grid item container justify="center" className={classes.iconSection}>
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -68,13 +82,16 @@ const UserCard = ({
               <ExpandMoreIcon />
             </IconButton>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.iconSection}>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <Typography>
+              <Typography align="center">{email}</Typography>
+              <Typography align="center">
+                Last login: {lastSignInTime.slice(0, 12)}
+              </Typography>
+              <Typography align="center">
+                Registered since:{" "}
                 {moment(createdAt && createdAt.toDate()).calendar()}
               </Typography>
-              <Typography>{lastSignInTime}</Typography>
-              <Typography>{email}</Typography>
               <Button variant="contained" color="secondary">
                 <Link component={RouterLink} underline="none" to="/profile">
                   Edit profile

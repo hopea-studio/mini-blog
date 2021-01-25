@@ -1,8 +1,8 @@
 import { Box, Grid } from "@material-ui/core"
 import React, { useContext } from "react"
 import { userContext } from "../providers/UsersProvider"
-import SignIn from "./SignIn"
-//import SingInAndSignUp from "./SingInAndSignUp"
+//import SignIn from "./SignIn"
+import SingInAndSignUp from "./SingInAndSignUp"
 import UserCard from "./UserCard"
 
 const Authentication = () => {
@@ -11,7 +11,7 @@ const Authentication = () => {
   return (
     <Box>
       <Grid container>
-        <Grid item>{user ? <UserCard {...user} /> : <SignIn />}</Grid>
+        <Grid item>{user ? <UserCard {...user} /> : <SingInAndSignUp />}</Grid>
         <Grid item></Grid>
       </Grid>
     </Box>

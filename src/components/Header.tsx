@@ -18,7 +18,7 @@ const Header = () => {
       <Grid container spacing={2} justify="space-between" alignItems="center">
         <Grid item md={4}>
           <Link component={RouterLink} underline="none" to="/">
-            <Typography underline="none" variant="h4" className={classes.text}>
+            <Typography variant="h4" className={classes.text} component="p">
               The Secret Cellar
             </Typography>
           </Link>
